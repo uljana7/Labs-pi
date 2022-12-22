@@ -1,0 +1,44 @@
+data.txt
+Alexandr man 5
+Sergey man 4
+Anastasia lady 5
+Nikolai man 3
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdlib.h>
+#define N 4
+typedef struct
+{
+    char name[20];
+    char sex[4];
+    int note;
+} student;
+int main()
+{
+    student studentlist[N];
+    int i;
+    FILE*data;
+    if((data=fopen("data.txt","r"))==0)
+    {
+        printf("файл не существует");
+        exit(1);
+    }
+    for (i=0;i<N;i++)
+    {
+        fscanf(data,"%s%s%d",studentlist[i].name,studentlist[i].sex,&studentlist[i].note);
+    }
+    for (i=0;i<N;i++)
+    {
+        if (studentlist[i].note>=4)
+        {
+            if (strcmp(studentlist[i].sex,"man")==0)
+            {
+                printf("%s-молодец!",studentlist[i].name);
+            }
+        }
+    }
+    fclose(data);
+    
+    return 0;
+}
